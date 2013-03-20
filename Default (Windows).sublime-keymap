@@ -1,0 +1,5 @@
+[
+  {
+    "keys": ["super+ctrl+i"], "command": "objc_to_ruby_motion"
+  }
+]
