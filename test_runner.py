@@ -20,8 +20,7 @@ def print_to_view(view, obtain_content):
 
     return view
 
-
-class ShowObjcToRubyMotionTestSuites(sublime_plugin.WindowCommand):
+class ShowObjcToRubyMotionTestsSuites(sublime_plugin.WindowCommand):
 
     def run(self):
         self.window.show_quick_panel(
