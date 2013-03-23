@@ -1,5 +1,16 @@
 import sublime, sublime_plugin, re
 
+def convert_args(matchobj):
+    # Consider args with colon followed by spaces
+    following_args = re.sub(r'([^:]+)(\s+)', r'\1,', matchobj.group(2))
+    # Clear extra spaces
+    following_args = re.sub(r'\s+', '', following_args)
+    return "%s(%s)" % (matchobj.group(1), following_args)
+
+def ruby_style_code(matchobj):
+    msg = re.sub(r'([^:]+)\:\s*(.+)', convert_args, matchobj.group(2))
+    return "%s.%s" % (matchobj.group(1), msg)
+
 class CodeConverter(object):
     def __init__(self, s):
         self.s = s
@@ -22,16 +33,7 @@ class CodeConverter(object):
                 break
         return self.s
 
-    def convert_args(matchobj):
-        # Consider args with colon followed by spaces
-        following_args = re.sub(r'([^:]+)(\s+)', r'\1,', matchobj.group(2))
-        # Clear extra spaces
-        following_args = re.sub(r'\s+', '', following_args)
-        return "%s(%s)" % (matchobj.group(1), following_args)
 
-    def ruby_style_code(matchobj):
-        msg = re.sub(r'([^:]+)\:\s*(.+)', convert_args, matchobj.group(2))
-        return "%s.%s" % (matchobj.group(1), msg)
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
