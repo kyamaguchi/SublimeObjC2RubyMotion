@@ -33,6 +33,11 @@ class CodeConverter(object):
                 break
         return self.s
 
+    def remove_semicolon_at_the_end(self):
+        return re.sub(r';', '', self.s)
+
+    def remove_autorelease(self):
+        return re.sub(r'\.autorelease$', '', self.s)
 
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
@@ -50,6 +55,8 @@ class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
 
         s = CodeConverter(s).replace_nsstring()
         s = CodeConverter(s).convert_square_brackets_expression()
+        s = CodeConverter(s).remove_semicolon_at_the_end()
+        s = CodeConverter(s).remove_autorelease()
 
         # Replace the selection with transformed text
         self.view.replace(edit, region, s)
