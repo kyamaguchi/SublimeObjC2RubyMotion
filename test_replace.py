@@ -38,12 +38,25 @@ class ObjcToRubyMotion(unittest.TestCase):
         source = CodeConverter(source).remove_autorelease()
         self.assertEqual(source, expected)
 
+    def test_remove_type_declaration(self):
+        source   = 'UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]'
+        expected = 'aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]'
+        source = CodeConverter(source).remove_type_declaration()
+        self.assertEqual(source, expected)
+
+    def test_remove_type_declaration_with_lead_spaces(self):
+        source   = '    UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]'
+        expected = '    aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]'
+        source = CodeConverter(source).remove_type_declaration()
+        self.assertEqual(source, expected)
+
     # All replacement
     def test_replace_objc(self):
-        source   = '[[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];'
-        expected = 'UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
+        source   = 'UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];'
+        expected = 'aWindow = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
         source = CodeConverter(source).replace_nsstring()
         source = CodeConverter(source).convert_square_brackets_expression()
         source = CodeConverter(source).remove_semicolon_at_the_end()
         source = CodeConverter(source).remove_autorelease()
+        source = CodeConverter(source).remove_type_declaration()
         self.assertEqual(source, expected)
