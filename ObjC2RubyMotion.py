@@ -39,6 +39,8 @@ class CodeConverter(object):
     def remove_autorelease(self):
         return re.sub(r'\.autorelease$', '', self.s)
 
+    def remove_type_declaration(self):
+        return re.sub(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', r'\1\2=', self.s)
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -57,6 +59,8 @@ class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
         s = CodeConverter(s).convert_square_brackets_expression()
         s = CodeConverter(s).remove_semicolon_at_the_end()
         s = CodeConverter(s).remove_autorelease()
+
+        s = CodeConverter(s).remove_type_declaration()
 
         # Replace the selection with transformed text
         self.view.replace(edit, region, s)
