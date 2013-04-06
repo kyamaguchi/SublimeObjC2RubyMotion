@@ -16,7 +16,8 @@ class CodeConverter(object):
         self.s = s
 
     def replace_nsstring(self):
-        return re.sub(r'@("(?:[^\\"]|\\.)*")', r'\1', self.s)
+        self.s = re.sub(r'@("(?:[^\\"]|\\.)*")', r'\1', self.s)
+        return self
 
     def convert_square_brackets_expression(self):
         max_attempt = 10 # Avoid infinite loops
@@ -28,19 +29,22 @@ class CodeConverter(object):
             if attempt_count > max_attempt :
                 break
             elif m :
-                self.s = re.sub(square_pattern, ruby_style_code, self.s)
+                self.s = re.sub(square_pattern, self.ruby_style_code, self.s)
             else :
                 break
-        return self.s
+        return self
 
     def remove_semicolon_at_the_end(self):
-        return re.sub(r';', '', self.s)
+        self.s = re.sub(r';', '', self.s)
+        return self
 
     def remove_autorelease(self):
-        return re.sub(r'\.autorelease$', '', self.s)
+        self.s = re.sub(r'\.autorelease$', '', self.s)
+        return self
 
     def remove_type_declaration(self):
-        return re.sub(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', r'\1\2=', self.s)
+        self.s = re.sub(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', r'\1\2=', self.s)
+        return self
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -55,12 +59,13 @@ class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
         # Get the selected text
         s = self.view.substr(region)
 
-        s = CodeConverter(s).replace_nsstring()
-        s = CodeConverter(s).convert_square_brackets_expression()
-        s = CodeConverter(s).remove_semicolon_at_the_end()
-        s = CodeConverter(s).remove_autorelease()
+        obj = CodeConverter(s)
+        obj.replace_nsstring()
+        obj.convert_square_brackets_expression()
+        obj.remove_semicolon_at_the_end()
+        obj.remove_autorelease()
 
-        s = CodeConverter(s).remove_type_declaration()
+        obj.remove_type_declaration()
 
         # Replace the selection with transformed text
-        self.view.replace(edit, region, s)
+        self.view.replace(edit, region, obj.s)
