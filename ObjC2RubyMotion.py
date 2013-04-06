@@ -56,11 +56,11 @@ class CodeConverter(object):
         return self
 
     def remove_autorelease(self):
-        self.s = re.sub(r'\.autorelease$', '', self.s)
+        self.s = re.sub(r'\.autorelease', '', self.s)
         return self
 
     def remove_type_declaration(self):
-        self.s = re.sub(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', r'\1\2=', self.s)
+        self.s = re.sub(re.compile(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', re.MULTILINE), r'\1\2=', self.s)
         return self
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
