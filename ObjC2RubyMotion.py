@@ -5,6 +5,7 @@ class CodeConverter(object):
         self.s = s
 
     def result(self):
+        self.multilines_to_one_line()
         self.replace_nsstring()
         self.convert_square_brackets_expression()
         self.remove_semicolon_at_the_end()
@@ -25,6 +26,12 @@ class CodeConverter(object):
         return "%s.%s" % (matchobj.group(1), msg)
 
     # Conversions
+    def multilines_to_one_line(self):
+        # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
+        self.s = re.sub(r'[\t ]+$', '', self.s)
+        self.s = re.sub(re.compile(r'([^;\s])$\n\s*', re.MULTILINE), r'\1 ', self.s)
+        return self
+
     def replace_nsstring(self):
         self.s = re.sub(r'@("(?:[^\\"]|\\.)*")', r'\1', self.s)
         return self
