@@ -62,5 +62,14 @@ For Running unit test
 Fortunately ObjC2RubyMotion has tests.
 
 Run the command `show_objc_to_ruby_motion_tests_suites`
-
 and Enter(`objc_to_ruby_motion` test suite will run).
+
+[Note] I'm getting some problem with reloading modules on developing plugin.
+
+For the workaround, uncomment the following lines in `test_replace.py`.
+And ensure to save the file before runnning test everytime.
+
+```python
+# import ObjC2RubyMotion
+# ObjC2RubyMotion = reload(ObjC2RubyMotion)
+```
