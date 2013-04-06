@@ -1,6 +1,8 @@
 import unittest
 import sys
 
+# import ObjC2RubyMotion
+# ObjC2RubyMotion = reload(ObjC2RubyMotion)
 from ObjC2RubyMotion import CodeConverter
 
 class ObjcToRubyMotion(unittest.TestCase):
