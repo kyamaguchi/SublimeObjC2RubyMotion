@@ -58,9 +58,4 @@ class ObjcToRubyMotion(unittest.TestCase):
     def test_replace_objc(self):
         source   = 'UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];'
         expected = 'aWindow = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
-        obj = CodeConverter(source).replace_nsstring()
-        obj.convert_square_brackets_expression()
-        obj.remove_semicolon_at_the_end()
-        obj.remove_autorelease()
-        obj.remove_type_declaration()
-        self.assertEqual(obj.s, expected)
+        self.assertEqual(CodeConverter(source).result(), expected)

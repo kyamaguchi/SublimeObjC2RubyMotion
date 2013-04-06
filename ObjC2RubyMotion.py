@@ -4,6 +4,14 @@ class CodeConverter(object):
     def __init__(self, s):
         self.s = s
 
+    def result(self):
+        self.replace_nsstring()
+        self.convert_square_brackets_expression()
+        self.remove_semicolon_at_the_end()
+        self.remove_autorelease()
+        self.remove_type_declaration()
+        return self.s
+
     # Helpers
     def convert_args(self, matchobj):
         # Consider args with colon followed by spaces
@@ -61,13 +69,5 @@ class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
         # Get the selected text
         s = self.view.substr(region)
 
-        obj = CodeConverter(s)
-        obj.replace_nsstring()
-        obj.convert_square_brackets_expression()
-        obj.remove_semicolon_at_the_end()
-        obj.remove_autorelease()
-
-        obj.remove_type_declaration()
-
         # Replace the selection with transformed text
-        self.view.replace(edit, region, obj.s)
+        self.view.replace(edit, region, CodeConverter(s).result())
