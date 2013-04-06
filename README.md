@@ -7,12 +7,12 @@ A command plugin that enables to convert Objective-C code to Ruby Motion.
 Code in the line of the cursor or selection are converted:
 
 ```objc
-# original
+// original
 _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 self.window.rootViewController = self.myNavController;
 [self.window makeKeyAndVisible];
 
-# select lines and run "objc_to_ruby_motion"
+// select lines and run "objc_to_ruby_motion"
 _window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 self.window.rootViewController = self.myNavController
 self.window.makeKeyAndVisible
@@ -59,7 +59,7 @@ For Running unit test
 
 ## Tests
 
-ObjC2RubyMotion has tests.
+Fortunately ObjC2RubyMotion has tests.
 
 Run the command `show_objc_to_ruby_motion_tests_suites`
 
