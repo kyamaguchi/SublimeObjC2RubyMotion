@@ -7,10 +7,12 @@ class CodeConverter(object):
     def result(self):
         self.multilines_to_one_line()
         self.replace_nsstring()
+        self.mark_spaces_in_string()
         self.convert_square_brackets_expression()
         self.remove_semicolon_at_the_end()
         self.remove_autorelease()
         self.remove_type_declaration()
+        self.restore_spaces_in_string()
         return self.s
 
     # Helpers
@@ -25,6 +27,9 @@ class CodeConverter(object):
         msg = re.sub(r'([^:]+)\:\s*(.+)', self.convert_args, matchobj.group(2))
         return "%s.%s" % (matchobj.group(1), msg)
 
+    def space_to_mark(self, matchobj):
+        return re.sub(r' ', '__SPACE__', matchobj.group(1))
+
     # Conversions
     def multilines_to_one_line(self):
         # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
@@ -35,6 +40,13 @@ class CodeConverter(object):
     def replace_nsstring(self):
         self.s = re.sub(r'@("(?:[^\\"]|\\.)*")', r'\1', self.s)
         return self
+
+    def mark_spaces_in_string(self):
+        self.s = re.sub(r'("(?:[^\\"]|\\.)*")', self.space_to_mark, self.s)
+        return self
+
+    def restore_spaces_in_string(self):
+        self.s = re.sub(r'__SPACE__', ' ', self.s)
 
     def convert_square_brackets_expression(self):
         max_attempt = 10 # Avoid infinite loops
