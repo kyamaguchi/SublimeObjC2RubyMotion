@@ -34,7 +34,7 @@ In internal order
 
 ## Install
 
-### Package Control
+### [NOT available yet] Package Control
 Install the `ObjC2RubyMotion` package from [Package Control](http://wbond.net/sublime_packages/package_control).
 
 
