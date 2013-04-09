@@ -16,9 +16,9 @@ class CodeConverter(object):
     # Helpers
     def convert_args(self, matchobj):
         # Consider args with colon followed by spaces
-        following_args = re.sub(r'([^:]+)(\s+)', r'\1,', matchobj.group(2))
-        # Clear extra spaces
-        following_args = re.sub(r'\s+', '', following_args)
+        following_args = re.sub(r'([^:]+)(\s+)(\S+):', r'\1,\3:', matchobj.group(2))
+        # Clear extra spaces after colons
+        following_args = re.sub(r':\s+', ':', following_args)
         return "%s(%s)" % (matchobj.group(1), following_args)
 
     def ruby_style_code(self, matchobj):
