@@ -92,7 +92,7 @@ class ObjcToRubyMotion(unittest.TestCase):
                                                              cancelButtonTitle:@"OK"
                                                              otherButtonTitles:nil] autorelease];
                       [alert show]"""
-        expected = """alert = UIAlertView.alloc.initWithTitle("Warning",message:"toomanyalerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
+        expected = """alert = UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
                       alert.show"""
         result = CodeConverter(source).result()
         self.assertEqual(result, expected)
@@ -106,5 +106,5 @@ class ObjcToRubyMotion(unittest.TestCase):
     # For Bugfix
     def test_string_including_spaces(self):
         source   = '[[UIAlertView alloc] initWithTitle:@"Warning" message:@"too many alerts"];'
-        expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts")'
-        self.assertEqual(CodeConverter(source).convert_square_brackets_expression().s, expected)
+        expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts");'
+        self.assertEqual(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
