@@ -102,3 +102,9 @@ class ObjcToRubyMotion(unittest.TestCase):
         source   = 'UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];'
         expected = 'aWindow = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
         self.assertEqual(CodeConverter(source).result(), expected)
+
+    # For Bugfix
+    def test_string_including_spaces(self):
+        source   = '[[UIAlertView alloc] initWithTitle:@"Warning" message:@"too many alerts"];'
+        expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts")'
+        self.assertEqual(CodeConverter(source).convert_square_brackets_expression().s, expected)
