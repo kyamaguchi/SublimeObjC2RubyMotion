@@ -57,23 +57,24 @@ For Conversion
 
 `super+ctrl+i` `objc_to_ruby_motion`
 
-For Running unit test
-
-`super+shift+ctrl+t` `show_objc_to_ruby_motion_tests_suites`
-
 ## Tests
 
 Fortunately ObjC2RubyMotion has tests.
 
-Run the command `show_objc_to_ruby_motion_tests_suites`
-and Enter(`objc_to_ruby_motion` test suite will run).
+### Run test from command line
 
-[Note] I'm getting some problem with reloading modules on developing plugin.
+```
+$ cd "~/Library/Application Support/Sublime Text 2/Packages/ObjC2RubyMotion"
+$ python tests/all_test.py
+```
 
-For the workaround, uncomment the following lines in `test_replace.py`.
-And ensure to save the file before runnning test everytime.
+OR
 
-```python
-# import ObjC2RubyMotion
-# ObjC2RubyMotion = reload(ObjC2RubyMotion)
+Use guard
+
+```
+# Requirement: ruby
+$ gem install guard
+$ gem install guard-shell
+$ guard
 ```
