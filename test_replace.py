@@ -3,7 +3,7 @@ import sys
 
 # import ObjC2RubyMotion
 # ObjC2RubyMotion = reload(ObjC2RubyMotion)
-from ObjC2RubyMotion import CodeConverter
+from CodeConverter import CodeConverter
 
 class ObjcToRubyMotion(unittest.TestCase):
     def setUp(self):
@@ -108,3 +108,6 @@ class ObjcToRubyMotion(unittest.TestCase):
         source   = '[[UIAlertView alloc] initWithTitle:@"Warning" message:@"  too many alerts!  \"  "];'
         expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"  too many alerts!  \"  ");'
         self.assertEqual(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
+
+if __name__ == '__main__':
+    unittest.main()
