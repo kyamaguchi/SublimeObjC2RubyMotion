@@ -11,7 +11,9 @@ sys.path.append(os.path.join(PROJECT_ROOT, "tests"))
 g_executing_test_suite = None
 
 test_suites = {
-    'objc_to_ruby_motion': ['objc_to_ruby_motion_tests', 'test_replace']
+    'all': 'all_test',
+    'basic': 'test_basic',
+    'convert': 'test_replace'
 }
 
 
@@ -37,7 +39,7 @@ class ShowObjcToRubyMotionTestsSuites(sublime_plugin.WindowCommand):
 
         suite_name = sorted(test_suites.keys())[index]
         g_executing_test_suite = suite_name
-        command_to_run = test_suites[suite_name][0]
+        command_to_run = 'objc_to_ruby_motion_tests'
 
         self.window.run_command(
             command_to_run,
@@ -48,8 +50,12 @@ class ObjcToRubyMotionTestsCommand(sublime_plugin.WindowCommand):
 
     def run(self, suite_name):
         bucket = StringIO.StringIO()
-        suite_name = test_suites[suite_name][1]
-        suite = unittest.defaultTestLoader.loadTestsFromName(suite_name)
+        if suite_name == 'all':
+            suite_list = [unittest.defaultTestLoader.loadTestsFromName(str) for str in test_suites.values()]
+            suite = unittest.TestSuite(suite_list)
+        else:
+            file_name = test_suites[suite_name]
+            suite = unittest.defaultTestLoader.loadTestsFromName(file_name)
         unittest.TextTestRunner(stream=bucket, verbosity=1).run(suite)
 
         print_to_view(self.window.new_file(), bucket.getvalue)
