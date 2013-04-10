@@ -1,16 +1,14 @@
 import unittest
-import sys
+import os, sys
 
-# import ObjC2RubyMotion
-# ObjC2RubyMotion = reload(ObjC2RubyMotion)
-from ObjC2RubyMotion import CodeConverter
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
-class ObjcToRubyMotion(unittest.TestCase):
+from CodeConverter import CodeConverter
+
+class TestReplace(unittest.TestCase):
     def setUp(self):
         pass
-
-    def test_initialize(self):
-        self.assertEqual(CodeConverter('foo').s, 'foo')
 
     def test_multilines_to_one_line(self):
         source   = """first_line;
@@ -20,7 +18,7 @@ class ObjcToRubyMotion(unittest.TestCase):
                       second_line third_line"""
         self.assertEqual(CodeConverter(source).multilines_to_one_line().s, expected)
 
-    def test_multilines_to_one_line(self):
+    def test_multilines_to_one_line_with_args(self):
         source   = """UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Warning"
                                                                        message:@"too many alerts"
                                                                       delegate:nil"""
@@ -108,3 +106,6 @@ class ObjcToRubyMotion(unittest.TestCase):
         source   = '[[UIAlertView alloc] initWithTitle:@"Warning" message:@"  too many alerts!  \"  "];'
         expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"  too many alerts!  \"  ");'
         self.assertEqual(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
+
+if __name__ == '__main__':
+    unittest.main()

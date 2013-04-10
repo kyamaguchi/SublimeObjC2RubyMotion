@@ -6,6 +6,8 @@ A command plugin that enables to convert Objective-C code to Ruby Motion.
 
 ![screenshot](https://raw.github.com/kyamaguchi/SublimeObjC2RubyMotion/master/screenshot.gif)
 
+_Using iShowU, KeyCastr, GIFBrewery_
+
 ## How It Works
 
 Code in the line of the cursor or selection are converted:
@@ -45,7 +47,7 @@ Clone this repository from your Sublime packages directory:
 #### Macosx
 
 ```
-$ cd "~/Library/Application Support/Sublime Text 2/Packages"
+$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages
 $ git clone https://github.com/kyamaguchi/SublimeObjC2RubyMotion.git ObjC2RubyMotion
 ```
 
@@ -57,23 +59,47 @@ For Conversion
 
 `super+ctrl+i` `objc_to_ruby_motion`
 
-For Running unit test
-
-`super+shift+ctrl+t` `show_objc_to_ruby_motion_tests_suites`
-
 ## Tests
 
-Fortunately ObjC2RubyMotion has tests.
+:smile: Fortunately ObjC2RubyMotion has tests.
 
-Run the command `show_objc_to_ruby_motion_tests_suites`
-and Enter(`objc_to_ruby_motion` test suite will run).
+### Run test from command line
 
-[Note] I'm getting some problem with reloading modules on developing plugin.
-
-For the workaround, uncomment the following lines in `test_replace.py`.
-And ensure to save the file before runnning test everytime.
-
-```python
-# import ObjC2RubyMotion
-# ObjC2RubyMotion = reload(ObjC2RubyMotion)
 ```
+$ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/ObjC2RubyMotion
+$ python tests/all_test.py
+```
+
+OR
+
+:racehorse: Use guard
+
+```
+# Requirement: ruby
+$ gem install guard
+$ gem install guard-shell
+$ guard
+```
+
+## Customize
+
+1. Fork it
+
+2. Remove original ObjC2RubyMotion and clone yours OR add your repository as another git remote
+
+  ```
+  $ cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages
+  $ git clone git@github.com:yourname/SublimeObjC2RubyMotion.git ObjC2RubyMotion
+  ```
+
+3. Copy test file and write new test
+
+  `cp tests/test_basic.py tests/test_custom.py`
+
+4. :snake: Change and Test
+
+  Normally, you should change `CodeConverter.py` and `test_*.py`.
+
+  `$ guard` is recommended.
+
+

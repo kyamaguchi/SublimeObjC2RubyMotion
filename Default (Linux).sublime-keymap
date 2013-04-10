@@ -1,4 +1,3 @@
 [
-  { "keys": ["super+shift+ctrl+t"], "command": "show_objc_to_ruby_motion_tests_suites" },
   { "keys": ["super+ctrl+i"], "command": "objc_to_ruby_motion" }
 ]
