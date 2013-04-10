@@ -6,12 +6,9 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
 from CodeConverter import CodeConverter
 
-class ObjcToRubyMotion(unittest.TestCase):
+class TestReplace(unittest.TestCase):
     def setUp(self):
         pass
-
-    def test_initialize(self):
-        self.assertEqual(CodeConverter('foo').s, 'foo')
 
     def test_multilines_to_one_line(self):
         source   = """first_line;
