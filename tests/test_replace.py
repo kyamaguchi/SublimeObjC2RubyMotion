@@ -21,7 +21,7 @@ class ObjcToRubyMotion(unittest.TestCase):
                       second_line third_line"""
         self.assertEqual(CodeConverter(source).multilines_to_one_line().s, expected)
 
-    def test_multilines_to_one_line(self):
+    def test_multilines_to_one_line_with_args(self):
         source   = """UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Warning"
                                                                        message:@"too many alerts"
                                                                       delegate:nil"""
