@@ -1,8 +1,9 @@
 import unittest
-import sys
+import os, sys
 
-# import ObjC2RubyMotion
-# ObjC2RubyMotion = reload(ObjC2RubyMotion)
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.append(os.path.join(PROJECT_ROOT, ".."))
+
 from CodeConverter import CodeConverter
 
 class ObjcToRubyMotion(unittest.TestCase):

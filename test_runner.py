@@ -3,6 +3,10 @@ import sublime_plugin
 import os
 import unittest
 import StringIO
+import sys
+
+PROJECT_ROOT = os.path.dirname(__file__)
+sys.path.append(os.path.join(PROJECT_ROOT, "tests"))
 
 g_executing_test_suite = None
 
