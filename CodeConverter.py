@@ -30,11 +30,17 @@ class CodeConverter(object):
     def space_to_mark(self, matchobj):
         return re.sub(r' ', '__SPACE__', matchobj.group(1))
 
+    def arrange_multilines(self, matchobj):
+        if matchobj.group(2) == '}' and '{' not in matchobj.group(1):
+            return matchobj.group()
+        else:
+            return "%s%s " % (matchobj.group(1), matchobj.group(2))
+
     # Conversions
     def multilines_to_one_line(self):
         # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
         self.s = re.sub(r'[\t ]+$', '', self.s)
-        self.s = re.sub(re.compile(r'([^;\s{}])$\n\s*', re.MULTILINE), r'\1 ', self.s)
+        self.s = re.sub(re.compile(r'(.*)([^;\s{])$\n^\s*', re.MULTILINE), self.arrange_multilines, self.s)
         return self
 
     def replace_nsstring(self):
