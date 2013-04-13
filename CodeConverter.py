@@ -24,6 +24,21 @@ class CodeConverter(object):
         following_args = re.sub(r':\s+', ':', following_args)
         return "%s(%s)" % (matchobj.group(1), following_args)
 
+    def convert_block_args(self, args):
+        if args is None:
+            return ''
+        else:
+            args = re.sub(r'^\(\s*(.*)\s*\)', r'\1', args)
+            args = [re.sub(r'\s*[a-zA-Z_0-9]+\s*\*?\s*(\S+)\s*', r'\1', s) for s in args.split(',')]
+            if len(args) > 1:
+                return '|' + ','.join(args) + '|'
+            else:
+                return args[0]
+
+    def convert_block_with_args(self, matchobj):
+        args = self.convert_block_args(matchobj.group(1))
+        return "->%s{%s}" % (args, matchobj.group(2))
+
     def ruby_style_code(self, matchobj):
         msg = re.sub(r'([^:]+)\:\s*(.+)', self.convert_args, matchobj.group(2))
         return "%s.%s" % (matchobj.group(1), msg)
@@ -57,7 +72,7 @@ class CodeConverter(object):
         return self
 
     def convert_blocks(self):
-        self.s = re.sub(r'\^{', '->{', self.s)
+        self.s = re.sub(r'\^\s*(\([^)]+\))?\s*{([^}]+)}', self.convert_block_with_args, self.s)
         return self
 
     def convert_square_brackets_expression(self):
