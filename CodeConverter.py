@@ -34,7 +34,7 @@ class CodeConverter(object):
     def multilines_to_one_line(self):
         # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
         self.s = re.sub(r'[\t ]+$', '', self.s)
-        self.s = re.sub(re.compile(r'([^;\s])$\n\s*', re.MULTILINE), r'\1 ', self.s)
+        self.s = re.sub(re.compile(r'([^;\s{}])$\n\s*', re.MULTILINE), r'\1 ', self.s)
         return self
 
     def replace_nsstring(self):

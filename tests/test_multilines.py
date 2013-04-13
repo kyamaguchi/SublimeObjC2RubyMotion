@@ -41,6 +41,22 @@ class TestMultilines(unittest.TestCase):
                       second_line"""
         self.assertEqual(CodeConverter(source).multilines_to_one_line().s, expected)
 
+    def test_multiline_with_braces(self):
+        source   = """    if (self) {
+        [self addMainLabel];
+        [self addSubLabel];
+        [self setupBackground];
+    }
+"""
+        expected = """    if (self) {
+        self.addMainLabel
+        self.addSubLabel
+        self.setupBackground
+    }
+"""
+        result = CodeConverter(source).result()
+        self.assertEqual(result, expected)
+
     def test_multiline_expression(self):
         source   = """UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Warning"
                                                                        message:@"too many alerts"
