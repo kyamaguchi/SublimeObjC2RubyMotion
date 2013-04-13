@@ -8,6 +8,7 @@ class CodeConverter(object):
         self.multilines_to_one_line()
         self.replace_nsstring()
         self.mark_spaces_in_string()
+        self.convert_blocks()
         self.convert_square_brackets_expression()
         self.remove_semicolon_at_the_end()
         self.remove_autorelease()
@@ -53,6 +54,10 @@ class CodeConverter(object):
 
     def restore_spaces_in_string(self):
         self.s = re.sub(r'__SPACE__', ' ', self.s)
+        return self
+
+    def convert_blocks(self):
+        self.s = re.sub(r'\^{', '->{', self.s)
         return self
 
     def convert_square_brackets_expression(self):

@@ -32,5 +32,11 @@ class TestBlock(unittest.TestCase):
         expected = """[UIView animateWithDuration:0.2 animations:^{view.alpha = 0.0;} completion:^(BOOL finished){ [view removeFromSuperview]; }];"""
         self.assertEqual(CodeConverter(source).multilines_to_one_line().s, expected)
 
+    def test_block_translation(self):
+        source   = """[UIView animateWithDuration:0.2
+                             animations:^{view.alpha = 0.0;}]"""
+        expected = """[UIView animateWithDuration:0.2 animations:->{view.alpha = 0.0;}]"""
+        self.assertEqual(CodeConverter(source).multilines_to_one_line().convert_blocks().s, expected)
+
 if __name__ == '__main__':
     unittest.main()
