@@ -47,6 +47,7 @@ class CodeConverter(object):
 
     def restore_spaces_in_string(self):
         self.s = re.sub(r'__SPACE__', ' ', self.s)
+        return self
 
     def convert_square_brackets_expression(self):
         max_attempt = 10 # Avoid infinite loops
