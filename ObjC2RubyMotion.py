@@ -1,4 +1,4 @@
-import sublime, sublime_plugin
+import sublime, sublime_plugin, sys
 
 if sys.version_info >= (3, 0):
     from .CodeConverter import CodeConverter
