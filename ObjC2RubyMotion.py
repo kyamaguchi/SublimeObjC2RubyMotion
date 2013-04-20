@@ -1,6 +1,9 @@
-import sublime, sublime_plugin
+import sublime, sublime_plugin, sys
 
-from CodeConverter import CodeConverter
+if sys.version_info >= (3, 0):
+    from .CodeConverter import CodeConverter
+else:
+    from CodeConverter import CodeConverter
 
 class ObjcToRubyMotionCommand(sublime_plugin.TextCommand):
     def run(self, edit):

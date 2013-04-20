@@ -1,4 +1,4 @@
-# ObjC2RubyMotion Converter for Sublime Text 2
+# ObjC2RubyMotion Converter for Sublime Text 2/3
 
 A command plugin that enables to convert Objective-C code to Ruby Motion.
 
