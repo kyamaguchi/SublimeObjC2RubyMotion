@@ -13,6 +13,7 @@ class CodeConverter(object):
         self.remove_semicolon_at_the_end()
         self.remove_autorelease()
         self.remove_type_declaration()
+        self.tidy_up()
         self.restore_spaces_in_string()
         return self.s
 
@@ -69,6 +70,10 @@ class CodeConverter(object):
 
     def restore_spaces_in_string(self):
         self.s = re.sub(r'__SPACE__', ' ', self.s)
+        return self
+
+    def tidy_up(self):
+        self.s = re.sub(r',([a-zA-Z_0-9]+):', r', \1:', self.s)
         return self
 
     def convert_blocks(self):

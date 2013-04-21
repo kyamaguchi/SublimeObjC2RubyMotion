@@ -62,7 +62,7 @@ class TestMultilines(unittest.TestCase, CustomTestCase):
                                                              cancelButtonTitle:@"OK"
                                                              otherButtonTitles:nil] autorelease];
                       [alert show]"""
-        expected = """alert = UIAlertView.alloc.initWithTitle("Warning",message:"too many alerts",delegate:nil,cancelButtonTitle:"OK",otherButtonTitles:nil)
+        expected = """alert = UIAlertView.alloc.initWithTitle("Warning", message:"too many alerts", delegate:nil, cancelButtonTitle:"OK", otherButtonTitles:nil)
                       alert.show"""
         result = CodeConverter(source).result()
         self.assertSentence(result, expected)
