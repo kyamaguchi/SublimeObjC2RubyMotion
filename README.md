@@ -24,16 +24,6 @@ self.window.rootViewController = self.myNavController
 self.window.makeKeyAndVisible
 ```
 
-### Conversions
-
-In internal order
-
-* Replace NSString `@"String"` -> `"String"`
-* Convert square brackets expression  `[[Obj alloc] init]` -> `Obj.alloc.init`
-* Remove semicolon `;` at the end of line
-* Remove `autorelease` at the end
-* Remove type declaration for Object `Type *` before `=`
-
 ## Install
 
 ### [NOT available yet] Package Control
@@ -58,6 +48,31 @@ By default,
 For Conversion
 
 `super+ctrl+i` `objc_to_ruby_motion`
+
+## Conversions
+
+#### In internal order
+
+* Replace NSString `@"String"` -> `"String"`
+* Convert blocks (may be not perfect)
+* Convert square brackets expression  `[[Obj alloc] init]` -> `Obj.alloc.init`
+* Remove semicolon `;` at the end of line
+* Remove `autorelease` at the end
+* Remove type declaration for Object `Type *` before `=`
+
+#### NOT supported
+
+* if else conditions etc.
+* YES/NO
+* actions `action:@selector(tapped:)`
+* Method name and args conversion `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
+* Others
+
+#### Note
+
+This converter is not intended to convert perfectly. This is intended to help the conversion of Objective-C code snippets.
+
+Some complex expression may not be converted correctly.
 
 ## Tests
 
@@ -102,4 +117,14 @@ $ guard
 
   `$ guard` is recommended.
 
+#### Note
 
+Probably most users of this plugin are rubyist, not pythonista.
+
+This converter is mostly composed of regular expression for now.
+
+If we try to improve this to convert more complex expressions, probably we need to replace the converter with the one using parser/tokenizer/scanner.
+
+Fork is welcomed.
+
+Care about unexpected string replacements. They could happen and they will be problems.
