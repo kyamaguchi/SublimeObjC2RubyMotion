@@ -12,7 +12,7 @@ class TestBugfix(unittest.TestCase, CustomTestCase):
     def test_string_including_spaces(self):
         source   = '[[UIAlertView alloc] initWithTitle:@"Warning" message:@"  too many alerts!  \"  "];'
         expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"  too many alerts!  \"  ");'
-        self.assertEqual(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
+        self.assertSentence(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
 
 if __name__ == '__main__':
     unittest.main()

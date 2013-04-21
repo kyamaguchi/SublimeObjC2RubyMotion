@@ -12,7 +12,7 @@ class TestReplaceAll(unittest.TestCase, CustomTestCase):
     def test_replace_objc(self):
         source   = 'UIWindow* aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];'
         expected = 'aWindow = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
-        self.assertEqual(CodeConverter(source).result(), expected)
+        self.assertSentence(CodeConverter(source).result(), expected)
 
 if __name__ == '__main__':
     unittest.main()
