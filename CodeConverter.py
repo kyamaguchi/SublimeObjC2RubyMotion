@@ -47,6 +47,8 @@ class CodeConverter(object):
     def arrange_multilines(self, matchobj):
         if matchobj.group(2) == '}' and '{' not in matchobj.group(1):
             return matchobj.group()
+        elif matchobj.group(2) == ']':
+            return matchobj.group()
         else:
             return "%s%s " % (matchobj.group(1), matchobj.group(2))
 

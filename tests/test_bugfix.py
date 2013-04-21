@@ -14,5 +14,13 @@ class TestBugfix(unittest.TestCase, CustomTestCase):
         expected = 'UIAlertView.alloc.initWithTitle("Warning",message:"  too many alerts!  \"  ");'
         self.assertSentence(CodeConverter(source).replace_nsstring().convert_square_brackets_expression().s, expected)
 
+    def test_multiline_with_block_arg_wont_join_lines(self):
+        source   = """[UIView animateWithDuration:0.2
+                             animations:^{view.alpha = 0.0;}]
+"""
+        expected = """[UIView animateWithDuration:0.2 animations:^{view.alpha = 0.0;}]
+"""
+        self.assertSentence(CodeConverter(source).multilines_to_one_line().s, expected)
+
 if __name__ == '__main__':
     unittest.main()

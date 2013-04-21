@@ -21,7 +21,7 @@ class TestTidy(unittest.TestCase, CustomTestCase):
     def test_tidy_args_with_block(self):
         source   = """UIView.animateWithDuration(0.2,animations:->{ view.alpha = 0.0 })"""
         expected = """UIView.animateWithDuration(0.2, animations: -> { view.alpha = 0.0 })"""
-        self.assertSentence(CodeConverter(source).tidy_up().s, expected)
+        self.assertSentence(CodeConverter(source).result(), expected)
 
     def test_tidy_block_with_one_args(self):
         source   = """[UIView animateWithDuration:0.2
