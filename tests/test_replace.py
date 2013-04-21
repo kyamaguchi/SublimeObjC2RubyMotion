@@ -1,12 +1,12 @@
-import unittest
-import os, sys
+import unittest, os, sys
+from custom_test_case import CustomTestCase
 
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
 from CodeConverter import CodeConverter
 
-class TestReplace(unittest.TestCase):
+class TestReplace(unittest.TestCase, CustomTestCase):
 
     def test_replace_nsstring(self):
         source   = 'NSDictionary *updatedLatte = [responseObject objectForKey:@"latte"];'

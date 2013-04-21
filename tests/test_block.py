@@ -1,12 +1,12 @@
-import unittest
-import os, sys
+import unittest, os, sys
+from custom_test_case import CustomTestCase
 
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
 from CodeConverter import CodeConverter
 
-class TestBlock(unittest.TestCase):
+class TestBlock(unittest.TestCase, CustomTestCase):
 
     def test_preserve_multilines_with_block_with_multilines(self):
         source   = """[aSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop){

@@ -1,12 +1,12 @@
-import unittest
-import os, sys
+import unittest, os, sys
+from custom_test_case import CustomTestCase
 
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
 from CodeConverter import CodeConverter
 
-class TestBugfix(unittest.TestCase):
+class TestBugfix(unittest.TestCase, CustomTestCase):
 
     # For Bugfix
     def test_string_including_spaces(self):

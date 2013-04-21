@@ -1,12 +1,12 @@
-import unittest
-import os, sys
+import unittest, os, sys
+from custom_test_case import CustomTestCase
 
 PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 
 from CodeConverter import CodeConverter
 
-class TestReplaceAll(unittest.TestCase):
+class TestReplaceAll(unittest.TestCase, CustomTestCase):
 
     # All replacement
     def test_replace_objc(self):
