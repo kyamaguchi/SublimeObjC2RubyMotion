@@ -14,5 +14,10 @@ class TestReplaceAll(unittest.TestCase, CustomTestCase):
         expected = 'aWindow = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)'
         self.assertSentence(CodeConverter(source).result(), expected)
 
+    def test_block_with_two_args_in_one_line(self):
+        source   = """[aSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop){ obj = nil; } ];"""
+        expected = """aSet.enumerateObjectsUsingBlock(->|obj,stop|{ obj = nil } )"""
+        self.assertSentence(CodeConverter(source).result(), expected)
+
 if __name__ == '__main__':
     unittest.main()
