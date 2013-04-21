@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestBlock(unittest.TestCase):
-    def setUp(self):
-        pass
 
     def test_preserve_multilines_with_block_with_multilines(self):
         source   = """[aSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop){

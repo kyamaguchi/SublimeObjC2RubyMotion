@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestBasic(unittest.TestCase):
-    def setUp(self):
-        pass
 
     def test_initialize(self):
         self.assertEqual(CodeConverter('foo').s, 'foo')

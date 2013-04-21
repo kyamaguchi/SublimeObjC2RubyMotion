@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestReplaceAll(unittest.TestCase):
-    def setUp(self):
-        pass
 
     # All replacement
     def test_replace_objc(self):

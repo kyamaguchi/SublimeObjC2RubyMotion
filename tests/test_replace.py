@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestReplace(unittest.TestCase):
-    def setUp(self):
-        pass
 
     def test_replace_nsstring(self):
         source   = 'NSDictionary *updatedLatte = [responseObject objectForKey:@"latte"];'

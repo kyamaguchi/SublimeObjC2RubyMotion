@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestBugfix(unittest.TestCase):
-    def setUp(self):
-        pass
 
     # For Bugfix
     def test_string_including_spaces(self):

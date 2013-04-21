@@ -7,8 +7,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, ".."))
 from CodeConverter import CodeConverter
 
 class TestMultilines(unittest.TestCase):
-    def setUp(self):
-        pass
 
     def test_multilines_to_one_line(self):
         source   = """first_line;
