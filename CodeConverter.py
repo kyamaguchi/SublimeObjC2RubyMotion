@@ -14,7 +14,7 @@ class CodeConverter(object):
         self.remove_autorelease()
         self.remove_type_declaration()
         self.tidy_up()
-        self.restore_spaces_in_string()
+        self.restore_characters_in_string()
         return self.s
 
     # Helpers
@@ -44,8 +44,11 @@ class CodeConverter(object):
         msg = re.sub(r'([^:]+)\:\s*(.+)', self.convert_args, matchobj.group(2))
         return "%s.%s" % (matchobj.group(1), msg)
 
-    def space_to_mark(self, matchobj):
-        return re.sub(r' ', '__SPACE__', matchobj.group(1))
+    def characters_to_mark(self, matchobj):
+        val = re.sub(r' ', '__SPACE__', matchobj.group(1))
+        val = re.sub(r',', '__COMMA__', val)
+        val = re.sub(r':', '__SEMICOLON__', val)
+        return val
 
     def arrange_multilines(self, matchobj):
         if matchobj.group(2) == '}' and '{' not in matchobj.group(1):
@@ -65,11 +68,13 @@ class CodeConverter(object):
         return self
 
     def mark_spaces_in_string(self):
-        self.s = re.sub(r'("(?:[^\\"]|\\.)*")', self.space_to_mark, self.s)
+        self.s = re.sub(r'("(?:[^\\"]|\\.)*")', self.characters_to_mark, self.s)
         return self
 
-    def restore_spaces_in_string(self):
+    def restore_characters_in_string(self):
         self.s = re.sub(r'__SPACE__', ' ', self.s)
+        self.s = re.sub(r'__COMMA__', ',', self.s)
+        self.s = re.sub(r'__SEMICOLON__', ':', self.s)
         return self
 
     def tidy_up(self):

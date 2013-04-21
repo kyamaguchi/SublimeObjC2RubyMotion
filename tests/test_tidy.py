@@ -13,5 +13,10 @@ class TestTidy(unittest.TestCase, CustomTestCase):
         expected = """UITabBarItem.alloc.initWithTabBarSystemItem(UITabBarSystemItemBookmarks, tag:0)"""
         self.assertSentence(CodeConverter(source).tidy_up().s, expected)
 
+    def test_tidy_args(self):
+        source   = 'NSLog(@"test,string:")'
+        expected = 'NSLog("test,string:")'
+        self.assertSentence(CodeConverter(source).result(), expected)
+
 if __name__ == '__main__':
     unittest.main()
