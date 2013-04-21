@@ -1,6 +1,4 @@
-import glob
-import unittest
-import os, sys
+import unittest, os, sys, glob
 
 if __name__ == '__main__':
     PROJECT_ROOT = os.path.dirname(__file__)
