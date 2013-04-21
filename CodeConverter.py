@@ -79,7 +79,12 @@ class CodeConverter(object):
         return self
 
     def tidy_up(self):
+        # convert arguments separated by ','
         self.s = re.sub(r',([a-zA-Z_0-9]+):', r', \1:', self.s)
+        # convert block
+        self.s = re.sub(r':->{([^}]+)}', r': -> {\1}', self.s)
+        # convert block with one args
+        self.s = re.sub(r':->([a-zA-Z_0-9]+){([^}]+)}', r': -> \1 {\2}', self.s)
         return self
 
     def convert_blocks(self):
