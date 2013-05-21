@@ -26,7 +26,7 @@ self.window.makeKeyAndVisible
 
 ## Install
 
-### [NOT available yet] Package Control
+### Package Control
 Install the `ObjC2RubyMotion` package from [Package Control](http://wbond.net/sublime_packages/package_control).
 
 
