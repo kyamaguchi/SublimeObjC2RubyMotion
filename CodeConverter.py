@@ -15,6 +15,7 @@ class CodeConverter(object):
         self.remove_type_declaration()
         self.tidy_up()
         self.restore_characters_in_string()
+        self.convert_boolean()
         return self.s
 
     # Helpers
@@ -118,4 +119,9 @@ class CodeConverter(object):
 
     def remove_type_declaration(self):
         self.s = re.sub(re.compile(r'^(\s*)[a-zA-Z_0-9]+\s*\*\s*([^=]+)=', re.MULTILINE), r'\1\2=', self.s)
+        return self
+
+    def convert_boolean(self):
+        self.s = re.sub('YES','true', self.s)
+        self.s = re.sub('NO','false', self.s)
         return self

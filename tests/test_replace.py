@@ -50,5 +50,15 @@ class TestReplace(unittest.TestCase, CustomTestCase):
         expected = '    aWindow = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease]'
         self.assertSentence(CodeConverter(source).remove_type_declaration().s, expected)
 
+    def test_converts_boolean_yes(self):
+        source = '[button setAttr:YES];'
+        expected = '[button setAttr:true];'
+        self.assertSentence(CodeConverter(source).convert_boolean().s, expected)
+
+    def test_converts_boolean_no(self):
+        source = '[button setAttr:NO];'
+        expected = '[button setAttr:false];'
+        self.assertSentence(CodeConverter(source).convert_boolean().s, expected)
+
 if __name__ == '__main__':
     unittest.main()

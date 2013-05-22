@@ -63,7 +63,6 @@ For Conversion
 #### NOT supported
 
 * if else conditions etc.
-* YES/NO
 * actions `action:@selector(tapped:)`
 * Method name and args conversion `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
 * Others
