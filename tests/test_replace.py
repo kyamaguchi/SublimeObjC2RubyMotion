@@ -60,5 +60,10 @@ class TestReplace(unittest.TestCase, CustomTestCase):
         expected = '[button setAttr:false];'
         self.assertSentence(CodeConverter(source).convert_boolean().s, expected)
 
+    def test_avoid_unexpected_replacement_for_boolean(self):
+        source = '[ZNOAuth foo:"NOW"];'
+        expected = '[ZNOAuth foo:"NOW"];'
+        self.assertSentence(CodeConverter(source).convert_boolean().s, expected)
+
 if __name__ == '__main__':
     unittest.main()

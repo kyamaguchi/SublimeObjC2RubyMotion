@@ -122,6 +122,6 @@ class CodeConverter(object):
         return self
 
     def convert_boolean(self):
-        self.s = re.sub('YES','true', self.s)
-        self.s = re.sub('NO','false', self.s)
+        self.s = re.sub(r'\bYES\b','true', self.s)
+        self.s = re.sub(r'\bNO\b','false', self.s)
         return self
