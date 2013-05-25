@@ -5,6 +5,7 @@ class CodeConverter(object):
         self.s = s
 
     def result(self):
+        self.remove_comments()
         self.multilines_to_one_line()
         self.replace_nsstring()
         self.mark_spaces_in_string()
@@ -67,6 +68,11 @@ class CodeConverter(object):
         return self
 
     # Conversions
+    def remove_comments(self):
+        self.s = re.sub(re.compile(r'^[ \t]*//.*\n', re.MULTILINE), '', self.s)
+        self.s = re.sub(re.compile(r'^(.*)//.*(\n|$)', re.MULTILINE), r'\1\2', self.s)
+        return self
+
     def multilines_to_one_line(self):
         # Remove trailing white space first. Refs: TrimTrailingWhiteSpace
         self.s = re.sub(r'[\t ]+$', '', self.s)

@@ -53,6 +53,7 @@ For Conversion
 
 #### In internal order
 
+* Remove inline comments `//`
 * Replace NSString `@"String"` -> `"String"`
 * Convert blocks (may be not perfect)
 * Convert square brackets expression  `[[Obj alloc] init]` -> `Obj.alloc.init`
