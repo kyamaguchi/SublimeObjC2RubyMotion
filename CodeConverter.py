@@ -13,9 +13,9 @@ class CodeConverter(object):
         self.remove_semicolon_at_the_end()
         self.remove_autorelease()
         self.remove_type_declaration()
+        self.convert_boolean()
         self.tidy_up()
         self.restore_characters_in_string()
-        self.convert_boolean()
         return self.s
 
     # Helpers

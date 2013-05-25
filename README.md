@@ -59,6 +59,7 @@ For Conversion
 * Remove semicolon `;` at the end of line
 * Remove `autorelease` at the end
 * Remove type declaration for Object `Type *` before `=`
+* YES/NO
 
 #### NOT supported
 
