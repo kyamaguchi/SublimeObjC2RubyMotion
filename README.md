@@ -53,8 +53,8 @@ For Conversion
 
 #### In internal order
 
-* Remove inline comments `//`
 * Replace NSString `@"String"` -> `"String"`
+* Remove inline comments `//`
 * Convert blocks (may be not perfect)
 * Convert square brackets expression  `[[Obj alloc] init]` -> `Obj.alloc.init`
 * Remove semicolon `;` at the end of line
@@ -64,6 +64,7 @@ For Conversion
 
 #### NOT supported
 
+* Complex block
 * if else conditions etc.
 * actions `action:@selector(tapped:)`
 * Method name and args conversion `- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section`
