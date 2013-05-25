@@ -5,10 +5,10 @@ class CodeConverter(object):
         self.s = s
 
     def result(self):
+        self.mark_spaces_in_string()
         self.remove_comments()
         self.multilines_to_one_line()
         self.replace_nsstring()
-        self.mark_spaces_in_string()
         self.convert_blocks()
         self.convert_square_brackets_expression()
         self.remove_semicolon_at_the_end()
@@ -59,12 +59,14 @@ class CodeConverter(object):
         val = re.sub(r' ', '__SPACE__', matchobj.group(1))
         val = re.sub(r',', '__COMMA__', val)
         val = re.sub(r':', '__SEMICOLON__', val)
+        val = re.sub(r'/', '__SLASH__', val)
         return val
 
     def restore_characters_in_string(self):
         self.s = re.sub(r'__SPACE__', ' ', self.s)
         self.s = re.sub(r'__COMMA__', ',', self.s)
         self.s = re.sub(r'__SEMICOLON__', ':', self.s)
+        self.s = re.sub(r'__SLASH__', '/', self.s)
         return self
 
     # Conversions

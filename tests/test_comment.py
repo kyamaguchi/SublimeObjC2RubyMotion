@@ -34,6 +34,11 @@ class TestComment(unittest.TestCase, CustomTestCase):
         expected = '  [self foo];'
         self.assertSentence(CodeConverter(source).remove_comments().s, expected)
 
+    def test_dont_remove_url(self):
+        source   = 'NSURL* url = [NSURL URLWithString:@"http://www.sublimetext.com/"];'
+        expected = 'url = NSURL.URLWithString("http://www.sublimetext.com/")'
+        self.assertSentence(CodeConverter(source).result(), expected)
+
     def test_remove_inline_comment_in_multilines(self):
         source   = """  [self foo];// comment here
   [self bar];// comment2 here"""
