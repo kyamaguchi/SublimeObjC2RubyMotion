@@ -4,7 +4,7 @@ A command plugin that enables to convert Objective-C code to Ruby Motion.
 
 ### Screenshot:
 
-![screenshot](https://raw.github.com/kyamaguchi/SublimeObjC2RubyMotion/master/screenshot.gif)
+![screenshot](https://rawgithub.com/kyamaguchi/SublimeObjC2RubyMotion/master/screenshot.gif)
 
 _Using iShowU, KeyCastr, GIFBrewery_
 
