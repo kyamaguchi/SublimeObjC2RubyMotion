@@ -13,5 +13,10 @@ class TestNumber(unittest.TestCase, CustomTestCase):
         expected = 'CGRect rect = CGRectMake(100, 100, 10.5, 10.5);'
         self.assertSentence(CodeConverter(source).convert_float().s, expected)
 
+    def test_convert_cg_rect_make(self):
+        source   = 'CGRectMake( 100 , 100 , 10.5 , 10.5 )'
+        expected = '[[100, 100], [10.5, 10.5]]'
+        self.assertSentence(CodeConverter(source).convert_cg_rect_make().s, expected)
+
 if __name__ == '__main__':
     unittest.main()

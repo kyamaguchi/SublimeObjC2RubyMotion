@@ -62,6 +62,7 @@ For Conversion
 * Remove type declaration for Object `Type *` before `=`
 * YES/NO
 * Float `100.0f` -> `100`
+* CGRectMake `CGRectMake(10, 10, 20, 20)` -> `[[10, 10], [20, 20]]`
 
 #### NOT supported
 
