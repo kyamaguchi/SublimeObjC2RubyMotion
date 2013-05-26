@@ -61,6 +61,7 @@ For Conversion
 * Remove `autorelease` at the end
 * Remove type declaration for Object `Type *` before `=`
 * YES/NO
+* Float `100.0f` -> `100`
 
 #### NOT supported
 

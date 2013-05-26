@@ -15,6 +15,7 @@ class CodeConverter(object):
         self.remove_autorelease()
         self.remove_type_declaration()
         self.convert_boolean()
+        self.convert_float()
         self.tidy_up()
         self.restore_characters_in_string()
         return self.s
@@ -132,4 +133,9 @@ class CodeConverter(object):
     def convert_boolean(self):
         self.s = re.sub(r'\bYES\b','true', self.s)
         self.s = re.sub(r'\bNO\b','false', self.s)
+        return self
+
+    def convert_float(self):
+        self.s = re.sub(r'\b(\d+)\.0f\b', r'\1', self.s)
+        self.s = re.sub(r'\b(\d+\.\d+)f\b', r'\1', self.s)
         return self
