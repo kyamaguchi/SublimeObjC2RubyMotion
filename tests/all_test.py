@@ -7,3 +7,5 @@ if __name__ == '__main__':
     suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str in module_strings]
     testSuite = unittest.TestSuite(suites)
     text_runner = unittest.TextTestRunner().run(testSuite)
+    if not text_runner.wasSuccessful():
+        sys.exit(1)
